@@ -30,14 +30,18 @@ jobs:
       - name: Build with Maven
         run: mvn clean package
 
+      - name: Get short SHA
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)"
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ steps.get_version.outputs.version }}
-          release_name: Release ${{ steps.get_version.outputs.version }}
+          tag_name: v${{ steps.get_version.outputs.version }}-${{ steps.vars.outputs.sha_short }}
+          release_name: Release ${{ steps.get_version.outputs.version }}-${{ steps.vars.outputs.sha_short }}
           body: ${{ github.event.head_commit.message }}
           draft: false
           prerelease: false
