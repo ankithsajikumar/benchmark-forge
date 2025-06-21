@@ -1,4 +1,3 @@
-```markdown
 # Benchmark Forge
 
 A Spring Boot application for benchmarking simple CPU-bound computations. Designed for quick performance tests and demonstrations.
@@ -9,14 +8,14 @@ A Spring Boot application for benchmarking simple CPU-bound computations. Design
 +-------------------+
 |   User/Client     |
 +--------+----------+
-|
-v
+         |
+         v
 +--------+-------------------------+
 |     Spring Boot REST API        |
 |       (BenchMarkController)     |
 +--------+-------------------------+
-|
-v
+         |
+         v
 +-------------------+
 |  Computation Logic |
 +-------------------+
@@ -51,8 +50,8 @@ benchmark-forge/
 │                   └── benchmarkForge/
 │                       └── BenchmarkForgeApplicationTests.java
 └── target/
-├── benchmark-forge-0.0.1-SNAPSHOT.jar
-└── ...
+    ├── benchmark-forge-0.0.1-SNAPSHOT.jar
+    └── ...
 ```
 
 ## Features
@@ -96,9 +95,7 @@ curl http://localhost:8080/
 ```
 
 **Response:**
-```
 Welcome, curious optimizer! Ready to put your CPU to the test? May your benchmarks be fast and your coffee strong.
-```
 
 ### 2. Compute Endpoint (default iterations)
 
@@ -115,11 +112,8 @@ curl http://localhost:8080/compute/10000
 ```
 
 **Response Example:**
-```
 Computation complete! Result: 123456.789. Iterations: 10000. Time taken: 5 ms. (From amd64 architecture)
-```
 
 ## License
 
 MIT
-```
