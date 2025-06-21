@@ -21,12 +21,14 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
+      - name: Extract version from pom.xml
+        id: get_version
+        run: |
+          VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
       - name: Build with Maven
         run: mvn clean package
-
-      - name: Get short SHA
-        id: vars
-        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
 
       - name: Create Release
         id: create_release
@@ -34,8 +36,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ steps.vars.outputs.sha_short }}
-          release_name: Release ${{ steps.vars.outputs.sha_short }}
+          tag_name: v${{ steps.get_version.outputs.version }}
+          release_name: Release ${{ steps.get_version.outputs.version }}
           body: ${{ github.event.head_commit.message }}
           draft: false
           prerelease: false
@@ -46,6 +48,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./target/benchmark-forge-0.0.1-SNAPSHOT.jar
-          asset_name: benchmark-forge-0.0.1-SNAPSHOT.jar
+          asset_path: ./target/benchmark-forge-${{ steps.get_version.outputs.version }}.jar
+          asset_name: benchmark-forge-${{ steps.get_version.outputs.version }}.jar
           asset_content_type: application/java-archive
