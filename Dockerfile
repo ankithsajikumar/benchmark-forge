@@ -22,8 +22,13 @@ FROM eclipse-temurin:17-jre
 
 WORKDIR /app
 
-# Copy the built jar from the builder stage
-COPY --from=builder /app/target/benchmark-forge-0.0.1-SNAPSHOT.jar app.jar
+# Copy all built jars from builder
+COPY --from=builder /app/target /app/target
+
+# Find the correct jar and rename to app.jar
+RUN set -e; \
+    JAR=$(ls /app/target/benchmark-forge-*.jar | grep -v '\.original'); \
+    cp "$JAR" app.jar
 
 # Expose port 8080
 EXPOSE 8080
