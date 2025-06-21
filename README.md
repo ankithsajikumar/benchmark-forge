@@ -11,21 +11,18 @@ A Spring Boot application for benchmarking simple CPU-bound computations. Design
 +--------+----------+
 |
 v
-+--------+----------+
-| Spring Boot REST  |
-|   Controller      |
-| (BenchMarkController) |
-+--------+----------+
++--------+-------------------------+
+|     Spring Boot REST API        |
+|       (BenchMarkController)     |
++--------+-------------------------+
 |
 v
-+--------+----------+
-|   Computation     |
-|   Logic           |
++-------------------+
+|  Computation Logic |
 +-------------------+
 ```
 
 ## Folder Structure
-
 ```
 benchmark-forge/
 ├── docker-compose.yml
@@ -60,9 +57,9 @@ benchmark-forge/
 
 ## Features
 
-- `/` : Welcome message.
-- `/compute` : Runs a default computation.
-- `/compute/{iterations}` : Runs computation for a specified number of iterations.
+- `/` – Welcome message  
+- `/compute` – Runs a default computation  
+- `/compute/{iterations}` – Runs computation for a specified number of iterations  
 
 ## Getting Started
 
@@ -91,12 +88,13 @@ A workflow is provided to build and push the Docker image to GitHub Container Re
 
 ## API Endpoints & Sample Usage
 
-### 1. Welcome Endpoint
+### 1. Index Endpoint
 
 **Request:**
 ```sh
 curl http://localhost:8080/
 ```
+
 **Response:**
 ```
 Welcome, curious optimizer! Ready to put your CPU to the test? May your benchmarks be fast and your coffee strong.
